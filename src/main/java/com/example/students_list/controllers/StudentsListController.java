@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -14,7 +15,8 @@ public class StudentsListController {
 
     private final StudentsListService studentsListService;
     @GetMapping("/")
-    public String index(Model model, List<Student> students) {
+    public String index(Model model) {
+        List<Student> students = studentsListService.findAllStudents();
         model.addAttribute("students", students);
         return "index";
     }
@@ -25,11 +27,12 @@ public class StudentsListController {
     }
     @PostMapping("/student/edit/{id}")
     public String editStudent(@ModelAttribute Student student, @PathVariable Long id) {
-        studentsListService.editStudent(student);
+        studentsListService.editStudent(id, student);
         return "redirect:/";
     }
     @GetMapping("/student/add")
     public String showAddForm(Model model) {
+        model.addAttribute("student", new Student());
         model.addAttribute("formName", "Add student");
         model.addAttribute("action", "/student/add");
         model.addAttribute("submit", "Add");
@@ -48,7 +51,7 @@ public class StudentsListController {
     }
 
 
-    @PostMapping("/student/delete/{id}")
+    @GetMapping("/student/delete/{id}")
     public String deleteStudent(@PathVariable Long id) {
         studentsListService.deleteStudent(id);
         return "redirect:/";

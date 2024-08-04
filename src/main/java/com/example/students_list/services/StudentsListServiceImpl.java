@@ -25,8 +25,9 @@ public class StudentsListServiceImpl implements StudentsListService{
     }
 
     @Override
-    public void editStudent(Student student) {
-        Student newStudent = findStudentById(student.getId());
+    public void editStudent(long id, Student newStudent) {
+        findStudentById(id);
+        newStudent.setId(id);
         studentsListRepository.editStudent(newStudent);
     }
 

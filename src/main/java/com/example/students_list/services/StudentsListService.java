@@ -13,7 +13,7 @@ public interface StudentsListService {
     void addStudent(Student student);
 
 
-    void editStudent(Student Student);
+    void editStudent(long id, Student Student);
 
     void deleteStudent(long id);
 

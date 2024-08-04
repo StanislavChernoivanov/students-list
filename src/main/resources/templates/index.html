@@ -10,7 +10,7 @@
     <thead>
     <tr>
         <th>Id</th>
-        <th>firsName</th>
+        <th>firstName</th>
         <th>lastName</th>
         <th>email</th>
         <th>phone</th>
@@ -24,12 +24,13 @@
             <td th:text="${student.email}"></td>
             <td th:text="${student.phone}"></td>
             <td>
-                <a th:href="@{/student/edit/{id}{id=${student.id}}}">Edit</a>
-                <a th:href="@{/student/delete/{id}{id=${student.id}}}">Delete</a>
+                <a th:href="@{/student/edit/{id}(id=${student.id})}">Edit</a>
+                <a th:href="@{/student/delete/{id}(id=${student.id})}">Delete</a>
             </td>
         </tr>
     </tbody>
 </table>
+<br>
 <a th:href="@{/student/add}">Add student</a>
 </body>
 </html>
